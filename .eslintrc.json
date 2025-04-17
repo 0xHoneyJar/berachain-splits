@@ -28,6 +28,7 @@
     "plugin:prettier/recommended"
   ],
   "rules": {
+    "react/react-in-jsx-scope": "off",
     "no-loops/no-loops": 2,
     "no-console": 1,
     "prettier/prettier": 2,
