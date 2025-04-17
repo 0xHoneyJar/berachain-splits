@@ -2,9 +2,9 @@
 
 import '@rainbow-me/rainbowkit/styles.css'
 
-import React, { ReactNode, Suspense } from 'react'
+import { ReactNode, Suspense } from 'react'
 
-import { SplitsProvider } from '@0xsplits/splits-kit'
+import { SplitsProvider } from '@zksoju/splits-kit'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 import LoadingIndicator from '~/components/LoadingIndicator'
@@ -13,7 +13,7 @@ import {
   WagmiProviderWrapper,
 } from '~/context/externalContext'
 
-import '@0xsplits/splits-kit/styles.css'
+import '@zksoju/splits-kit/styles.css'
 
 const queryClient = new QueryClient()
 

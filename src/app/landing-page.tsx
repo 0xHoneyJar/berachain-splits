@@ -6,8 +6,8 @@ import {
   CreateSplit,
   DisplaySplitViaProvider,
   useSplitsClient,
-} from '@0xsplits/splits-kit'
-import { AddressInput } from '@0xsplits/splits-kit/inputs'
+} from '@zksoju/splits-kit'
+import { AddressInput } from '@zksoju/splits-kit/inputs'
 import { ConnectButton } from '@rainbow-me/rainbowkit'
 import Link from 'next/link'
 import {
