@@ -1,14 +1,14 @@
 'use client'
 
-import React, { useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 
+import { ConnectButton } from '@rainbow-me/rainbowkit'
 import {
   CreateSplit,
   DisplaySplitViaProvider,
   useSplitsClient,
 } from '@zksoju/splits-kit'
 import { AddressInput } from '@zksoju/splits-kit/inputs'
-import { ConnectButton } from '@rainbow-me/rainbowkit'
 import Link from 'next/link'
 import {
   Control,

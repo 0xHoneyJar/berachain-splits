@@ -4,8 +4,8 @@ import '@rainbow-me/rainbowkit/styles.css'
 
 import { ReactNode, Suspense } from 'react'
 
-import { SplitsProvider } from '@zksoju/splits-kit'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { SplitsProvider } from '@zksoju/splits-kit'
 
 import LoadingIndicator from '~/components/LoadingIndicator'
 import {
