@@ -8,15 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@0xsplits/splits-kit':
-        specifier: file:.yalc/@0xsplits/splits-kit
-        version: file:.yalc/@0xsplits/splits-kit(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(viem@2.27.0(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10))(wagmi@2.14.16(@tanstack/query-core@5.74.3)(@tanstack/react-query@5.74.3(react@18.3.1))(@types/react@17.0.85)(bufferutil@4.0.9)(react@18.3.1)(typescript@5.8.3)(utf-8-validate@5.0.10)(viem@2.27.0(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)))
-      '@0xsplits/splits-sdk':
-        specifier: file:.yalc/@0xsplits/splits-sdk
-        version: file:.yalc/@0xsplits/splits-sdk(viem@2.27.0(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10))
-      '@0xsplits/splits-sdk-react':
-        specifier: file:.yalc/@0xsplits/splits-sdk-react
-        version: file:.yalc/@0xsplits/splits-sdk-react(react@18.3.1)(viem@2.27.0(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10))
       '@radix-ui/react-tabs':
         specifier: ^1.1.1
         version: 1.1.4(@types/react-dom@18.3.6(@types/react@17.0.85))(@types/react@17.0.85)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -138,31 +129,6 @@ packages:
       graphql: ^14.0.0 || ^15.0.0 || ^16.0.0
     peerDependenciesMeta:
       graphql:
-        optional: true
-
-  '@0xsplits/splits-kit@file:.yalc/@0xsplits/splits-kit':
-    resolution: {directory: .yalc/@0xsplits/splits-kit, type: directory}
-    peerDependencies:
-      react: 17.x.x || 18.x.x
-      react-dom: 17.x.x || 18.x.x
-      viem: 2.x.x
-      wagmi: 2.x.x
-
-  '@0xsplits/splits-sdk-react@file:.yalc/@0xsplits/splits-sdk-react':
-    resolution: {directory: .yalc/@0xsplits/splits-sdk-react, type: directory}
-    peerDependencies:
-      react: 17.x.x || 18.x.x
-      viem: ^2.0.0
-    peerDependenciesMeta:
-      viem:
-        optional: true
-
-  '@0xsplits/splits-sdk@file:.yalc/@0xsplits/splits-sdk':
-    resolution: {directory: .yalc/@0xsplits/splits-sdk, type: directory}
-    peerDependencies:
-      viem: ^2.0.0
-    peerDependenciesMeta:
-      viem:
         optional: true
 
   '@adraffy/ens-normalize@1.11.0':
@@ -3297,41 +3263,6 @@ snapshots:
   '@0no-co/graphql.web@1.1.2(graphql@16.10.0)':
     optionalDependencies:
       graphql: 16.10.0
-
-  '@0xsplits/splits-kit@file:.yalc/@0xsplits/splits-kit(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(viem@2.27.0(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10))(wagmi@2.14.16(@tanstack/query-core@5.74.3)(@tanstack/react-query@5.74.3(react@18.3.1))(@types/react@17.0.85)(bufferutil@4.0.9)(react@18.3.1)(typescript@5.8.3)(utf-8-validate@5.0.10)(viem@2.27.0(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)))':
-    dependencies:
-      '@0xsplits/splits-sdk': link:.yalc/@0xsplits/splits-sdk
-      '@0xsplits/splits-sdk-react': link:.yalc/@0xsplits/splits-sdk-react
-      '@headlessui/react': 1.7.19(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@heroicons/react': 2.2.0(react@18.3.1)
-      '@hookform/error-message': 2.0.1(react-dom@18.3.1(react@18.3.1))(react-hook-form@7.55.0(react@18.3.1))(react@18.3.1)
-      autoprefixer: 10.4.21(postcss@8.5.3)
-      lodash: 4.17.21
-      postcss: 8.5.3
-      react: 18.3.1
-      react-blockies: 1.4.1(react@18.3.1)
-      react-dom: 18.3.1(react@18.3.1)
-      react-hook-form: 7.55.0(react@18.3.1)
-      react-number-format: 5.4.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      styled-components: 6.1.17(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      viem: 2.27.0(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)
-      wagmi: 2.14.16(@tanstack/query-core@5.74.3)(@tanstack/react-query@5.74.3(react@18.3.1))(@types/react@17.0.85)(bufferutil@4.0.9)(react@18.3.1)(typescript@5.8.3)(utf-8-validate@5.0.10)(viem@2.27.0(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10))
-
-  '@0xsplits/splits-sdk-react@file:.yalc/@0xsplits/splits-sdk-react(react@18.3.1)(viem@2.27.0(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10))':
-    dependencies:
-      '@0xsplits/splits-sdk': link:.yalc/@0xsplits/splits-sdk
-      react: 18.3.1
-    optionalDependencies:
-      viem: 2.27.0(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)
-
-  '@0xsplits/splits-sdk@file:.yalc/@0xsplits/splits-sdk(viem@2.27.0(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10))':
-    dependencies:
-      '@urql/core': 4.3.0(graphql@16.10.0)
-      base-64: 1.0.0
-      graphql: 16.10.0
-      lodash: 4.17.21
-    optionalDependencies:
-      viem: 2.27.0(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)
 
   '@adraffy/ens-normalize@1.11.0': {}
 
