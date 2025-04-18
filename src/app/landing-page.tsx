@@ -199,6 +199,7 @@ const SearchSplit = ({
         <div className="w-full space-y-2">
           <label>Split address on {chain?.name}</label>
           <AddressInput
+          
             control={control}
             inputName={'address'}
             placeholder={'0x...'}
