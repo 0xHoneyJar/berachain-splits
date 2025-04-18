@@ -32,6 +32,12 @@ import { Tabs, TabsContent } from '~/components/ui/tabs'
 import { RPC_URLS_MAP } from '~/constants/chains'
 import { ERC_20_TOKEN_LIST_BY_CHAIN } from '~/constants/erc20'
 
+const contractAddresses = {
+  "PullSplitFactoryV2.1": "0x09d053beA2fc4F3999Ff90b6F6d32314a9965115",
+  "PushSplitFactoryV2.1": "0x65B682D297C09f21B106EBb16666124431fB178D",
+  "SplitsWarehouse": "0xadfC58C804072F41D5fCd296F19B8874B021Ea2C"
+};
+
 export default function Home() {
   const { address, isConnecting } = useAccount()
 
@@ -65,9 +71,9 @@ const ExternalLink = ({ url, text }: { url: string; text: string }) => {
 const LandingPage = () => {
   return (
     <div className="max-w-prose space-y-4">
-      <div className="text-4xl">Splits Lite</div>
+      <div className="text-4xl">Splits Lite on Berachain</div>
       <p className="text-lg text-gray-600 dark:text-gray-400">
-        A minimal app for creating and distributing Splits. Connect your wallet
+        A minimal app for creating and distributing Splits on Berachain. Connect your wallet
         to continue.
       </p>
       <div className="flex flex-col space-y-4 md:flex-row md:items-center md:space-x-4 md:space-y-0">
@@ -75,14 +81,32 @@ const LandingPage = () => {
           url="https://github.com/0xSplits/splits-lite/tree/main"
           text="View on Github"
         />
-        <ExternalLink
+        {/* <ExternalLink
           url="https://github.com/0xSplits/splits-lite/blob/main/src/constants/chains.ts"
           text="Supported chains"
-        />
+        /> */}
         <ExternalLink
           url="https://github.com/0xSplits/splits-lite/blob/main/src/constants/erc20.ts"
           text="Supported tokens"
         />
+      </div>
+      <div className="pt-8 w-full">
+        <h3 className="mb-8 text-xl">Deployed Contracts</h3>
+        <ul className="space-y-4 w-full text-gray-600 dark:text-gray-400">
+          {Object.entries(contractAddresses).map(([name, address]) => (
+            <div key={name} className='flex w-full justify-between items-center gap-2'>
+              <span>{name}</span>
+              <a
+                href={`https://berascan.com/address/${address}`}
+                target="_blank"
+                rel="noreferrer"
+                className="rounded border border-gray-200 px-3 py-1 text-center hover:bg-gray-100 md:text-left dark:border-gray-700 dark:hover:bg-gray-800"
+              >
+                {address}
+              </a>
+            </div>
+          ))}
+        </ul>
       </div>
     </div>
   )
@@ -134,42 +158,45 @@ const ConnectedPage = () => {
   if (!chain || !chainId) return <UnsupportedNetwork />
 
   return (
-    <Tabs
-      value={tab}
-      onValueChange={onTabChange}
-      defaultValue="create"
-      options={[
-        { value: 'create', display: 'Create' },
-        { value: 'search', display: 'Search' },
-      ]}
-    >
-      <TabsContent value="create">
-        <CreateSplit
-          chainId={chainId}
-          type={'v2Push'}
-          defaultDistributorFee={0}
-          defaultOwner={zeroAddress}
-          defaultDistributorFeeOptions={[]}
-          linkToApp={false}
-          supportsEns={false}
-          width={'xl'}
-          onSuccess={({ address }) => {
-            // TODO: delay first?
-            setValue('address', address)
-            setTab('search')
-          }}
-          displayChain={false}
-        />
-      </TabsContent>
-      <TabsContent value="search">
-        <SearchSplit
-          splitAddress={searchSplitAddress}
-          control={control}
-          setValue={setValue}
-          setError={setError}
-        />
-      </TabsContent>
-    </Tabs>
+    <>
+  
+      <Tabs
+        value={tab}
+        onValueChange={onTabChange}
+        defaultValue="create"
+        options={[
+          { value: 'create', display: 'Create' },
+          { value: 'search', display: 'Search' },
+        ]}
+      >
+        <TabsContent value="create">
+          <CreateSplit
+            chainId={chainId}
+            type={'v2Push'}
+            defaultDistributorFee={0}
+            defaultOwner={zeroAddress}
+            defaultDistributorFeeOptions={[]}
+            linkToApp={false}
+            supportsEns={false}
+            width={'xl'}
+            onSuccess={({ address }) => {
+              // TODO: delay first?
+              setValue('address', address)
+              setTab('search')
+            }}
+            displayChain={false}
+          />
+        </TabsContent>
+        <TabsContent value="search">
+          <SearchSplit
+            splitAddress={searchSplitAddress}
+            control={control}
+            setValue={setValue}
+            setError={setError}
+          />
+        </TabsContent>
+      </Tabs>
+    </>
   )
 }
 
