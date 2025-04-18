@@ -1,20 +1,20 @@
 import React from 'react'
 
 import {
-  RainbowKitProvider,
-  darkTheme,
-  lightTheme,
   DisclaimerComponent,
+  RainbowKitProvider,
   Theme,
+  darkTheme,
   getDefaultConfig,
+  lightTheme,
 } from '@rainbow-me/rainbowkit'
 import {
+  coinbaseWallet,
   injectedWallet,
   metaMaskWallet,
-  coinbaseWallet,
   rainbowWallet,
-  walletConnectWallet,
   safeWallet,
+  walletConnectWallet,
 } from '@rainbow-me/rainbowkit/wallets'
 import { merge } from 'lodash'
 import { WagmiProvider } from 'wagmi'
@@ -92,7 +92,7 @@ const RainbowDisclaimer: DisclaimerComponent = ({
 
 const customLightTheme = merge(
   lightTheme({
-    accentColor: '#3B82F6',
+    accentColor: '#fcba03',
     borderRadius: 'medium',
     fontStack: 'system',
   }),
@@ -104,7 +104,7 @@ const customLightTheme = merge(
 )
 const customDarkTheme = merge(
   darkTheme({
-    accentColor: '#3B82F6',
+    accentColor: '#fcba03',
     borderRadius: 'medium',
     fontStack: 'system',
   }),

@@ -61,7 +61,7 @@ const ExternalLink = ({ url, text }: { url: string; text: string }) => {
       href={url}
       target="_blank"
       rel="noreferrer"
-      className="rounded border border-gray-200 bg-gray-50 px-3 py-1 text-center hover:bg-gray-100 md:text-left dark:border-gray-700 dark:bg-gray-900 dark:hover:bg-gray-800"
+      className="rounded border px-3 py-1 text-center md:text-left border-yellow-700 bg-yellow-900 hover:bg-yellow-800"
     >
       {text}
     </a>
@@ -71,7 +71,7 @@ const ExternalLink = ({ url, text }: { url: string; text: string }) => {
 const LandingPage = () => {
   return (
     <div className="max-w-prose space-y-4">
-      <div className="text-4xl">Splits Lite on Berachain</div>
+      <div className="text-4xl">Splits Lite on <span className='text-yellow-500'>Berachain</span></div>
       <p className="text-lg text-gray-600 dark:text-gray-400">
         A minimal app for creating and distributing Splits on Berachain. Connect your wallet
         to continue.
@@ -92,15 +92,15 @@ const LandingPage = () => {
       </div>
       <div className="pt-8 w-full">
         <h3 className="mb-8 text-xl">Deployed Contracts</h3>
-        <ul className="space-y-4 w-full text-gray-600 dark:text-gray-400">
+        <ul className="space-y-4 w-full">
           {Object.entries(contractAddresses).map(([name, address]) => (
             <div key={name} className='flex w-full justify-between items-center gap-2'>
-              <span>{name}</span>
+              <span className='text-gray-400'>{name}</span>
               <a
                 href={`https://berascan.com/address/${address}`}
                 target="_blank"
                 rel="noreferrer"
-                className="rounded border border-gray-200 px-3 py-1 text-center hover:bg-gray-100 md:text-left dark:border-gray-700 dark:hover:bg-gray-800"
+                className="rounded border text-xs font-mono text-gray-400 px-3 py-1 text-center md:text-left border-white/10 hover:bg-white/10"
               >
                 {address}
               </a>
