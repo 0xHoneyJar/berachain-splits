@@ -1,5 +1,6 @@
-import localFont from 'next/font/local'
 import React from 'react'
+
+import localFont from 'next/font/local'
 
 import App from '~/app/app'
 
@@ -14,7 +15,8 @@ const clashDisplay = localFont({
 })
 
 const TITLE = 'Berachain Splits Lite'
-const DESCRIPTION = 'A minimal app for creating and distributing Splits on Berachain'
+const DESCRIPTION =
+  'A minimal app for creating and distributing Splits on Berachain'
 
 const OG_IMAGE_SIZE = {
   width: 1200,

@@ -33,10 +33,10 @@ import { RPC_URLS_MAP } from '~/constants/chains'
 import { ERC_20_TOKEN_LIST_BY_CHAIN } from '~/constants/erc20'
 
 const contractAddresses = {
-  "PullSplitFactoryV2.1": "0x09d053beA2fc4F3999Ff90b6F6d32314a9965115",
-  "PushSplitFactoryV2.1": "0x65B682D297C09f21B106EBb16666124431fB178D",
-  "SplitsWarehouse": "0xadfC58C804072F41D5fCd296F19B8874B021Ea2C"
-};
+  'PullSplitFactoryV2.1': '0x09d053beA2fc4F3999Ff90b6F6d32314a9965115',
+  'PushSplitFactoryV2.1': '0x65B682D297C09f21B106EBb16666124431fB178D',
+  SplitsWarehouse: '0xadfC58C804072F41D5fCd296F19B8874B021Ea2C',
+}
 
 export default function Home() {
   const { address, isConnecting } = useAccount()
@@ -61,7 +61,7 @@ const ExternalLink = ({ url, text }: { url: string; text: string }) => {
       href={url}
       target="_blank"
       rel="noreferrer"
-      className="rounded border px-3 py-1 text-center md:text-left border-yellow-700 bg-yellow-900 hover:bg-yellow-800"
+      className="rounded border border-yellow-700 bg-yellow-900 px-3 py-1 text-center hover:bg-yellow-800 md:text-left"
     >
       {text}
     </a>
@@ -71,10 +71,12 @@ const ExternalLink = ({ url, text }: { url: string; text: string }) => {
 const LandingPage = () => {
   return (
     <div className="max-w-prose space-y-4">
-      <div className="text-4xl">Splits Lite on <span className='text-yellow-500'>Berachain</span></div>
+      <div className="text-4xl">
+        Splits Lite on <span className="text-yellow-500">Berachain</span>
+      </div>
       <p className="text-lg text-gray-600 dark:text-gray-400">
-        A minimal app for creating and distributing Splits on Berachain. Connect your wallet
-        to continue.
+        A minimal app for creating and distributing Splits on Berachain. Connect
+        your wallet to continue.
       </p>
       <div className="flex flex-col space-y-4 md:flex-row md:items-center md:space-x-4 md:space-y-0">
         <ExternalLink
@@ -90,17 +92,20 @@ const LandingPage = () => {
           text="Supported tokens"
         />
       </div>
-      <div className="pt-8 w-full">
+      <div className="w-full pt-8">
         <h3 className="mb-8 text-xl">Deployed Contracts</h3>
-        <ul className="space-y-4 w-full">
+        <ul className="w-full space-y-4">
           {Object.entries(contractAddresses).map(([name, address]) => (
-            <div key={name} className='flex w-full justify-between items-center gap-2'>
-              <span className='text-gray-400'>{name}</span>
+            <div
+              key={name}
+              className="flex w-full items-center justify-between gap-2"
+            >
+              <span className="text-gray-400">{name}</span>
               <a
                 href={`https://berascan.com/address/${address}`}
                 target="_blank"
                 rel="noreferrer"
-                className="rounded border text-xs font-mono text-gray-400 px-3 py-1 text-center md:text-left border-white/10 hover:bg-white/10"
+                className="rounded border border-white/10 px-3 py-1 text-center font-mono text-xs text-gray-400 hover:bg-white/10 md:text-left"
               >
                 {address}
               </a>
@@ -159,7 +164,6 @@ const ConnectedPage = () => {
 
   return (
     <>
-  
       <Tabs
         value={tab}
         onValueChange={onTabChange}
@@ -226,7 +230,6 @@ const SearchSplit = ({
         <div className="w-full space-y-2">
           <label>Split address on {chain?.name}</label>
           <AddressInput
-          
             control={control}
             inputName={'address'}
             placeholder={'0x...'}
