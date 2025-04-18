@@ -2,12 +2,9 @@
 
 import { useMemo, useState } from 'react'
 
+import { gql, useQuery } from '@apollo/client'
 import { ConnectButton } from '@rainbow-me/rainbowkit'
-import {
-  CreateSplit,
-  DisplaySplitViaProvider,
-  useSplitsClient,
-} from '@zksoju/splits-kit'
+import { CreateSplit, useSplitsClient } from '@zksoju/splits-kit'
 import { AddressInput } from '@zksoju/splits-kit/inputs'
 import Link from 'next/link'
 import {
@@ -30,13 +27,30 @@ import { useAccount, usePublicClient, useWalletClient } from 'wagmi'
 import LoadingIndicator from '~/components/LoadingIndicator'
 import { Tabs, TabsContent } from '~/components/ui/tabs'
 import { RPC_URLS_MAP } from '~/constants/chains'
-import { ERC_20_TOKEN_LIST_BY_CHAIN } from '~/constants/erc20'
 
 const contractAddresses = {
   'PullSplitFactoryV2.1': '0x09d053beA2fc4F3999Ff90b6F6d32314a9965115',
   'PushSplitFactoryV2.1': '0x65B682D297C09f21B106EBb16666124431fB178D',
   SplitsWarehouse: '0xadfC58C804072F41D5fCd296F19B8874B021Ea2C',
 }
+
+// --- Update GraphQL Query ---
+const GET_SPLIT_RECIPIENTS = gql`
+  # Use the query structure provided by the user
+  query MyQuery($id: String!) {
+    # Renamed from GetSplitRecipients to MyQuery
+    splitById(id: $id) {
+      # Changed root field to splitById
+      id
+      creator # Added creator field as per user query
+      recipients {
+        address
+        allocation # Changed field name from percentAllocation to allocation
+      }
+    }
+  }
+`
+// --- End GraphQL Query Definition ---
 
 export default function Home() {
   const { address, isConnecting } = useAccount()
@@ -215,14 +229,36 @@ const SearchSplit = ({
   setValue: UseFormSetValue<SearchSplitForm>
   setError: UseFormSetError<SearchSplitForm>
 }) => {
-  const { chain, chainId } = useAccount()
+  const { chain } = useAccount()
 
   const isAddressValid = (address: string) => {
     if (!address) return 'Required'
     return isAddress(address) || 'Invalid address'
   }
 
-  const erc20TokenList = ERC_20_TOKEN_LIST_BY_CHAIN[chainId!]
+  const { loading, error, data } = useQuery(GET_SPLIT_RECIPIENTS, {
+    variables: { id: splitAddress.toLowerCase() },
+    skip: !isAddress(splitAddress),
+  })
+
+  // --- Update data extraction to match new query structure ---
+  // Assumes allocation is Parts Per Million (e.g., 500000 = 50%)
+  // !!! Confirm allocation format if this assumption is wrong !!!
+  const recipients =
+    data?.splitById?.recipients?.map(
+      (r: { address: string; allocation: number }) => ({
+        address: r.address,
+        // Convert allocation (ppm) to percentage
+        percentAllocation: r.allocation / 10000,
+      }),
+    ) || []
+  const splitExists = !!data?.splitById // Check if splitById object exists
+  const fetchError = error
+    ? error.message
+    : !loading && isAddress(splitAddress) && !splitExists
+      ? 'Split not found.'
+      : null
+  // --- End data extraction ---
 
   return (
     <form style={{ width: '36rem' }}>
@@ -240,19 +276,62 @@ const SearchSplit = ({
             supportsEns={false}
           />
         </div>
-        {isAddress(splitAddress) && (
-          <DisplaySplitViaProvider
-            chainId={chainId!}
-            address={splitAddress}
-            erc20TokenList={erc20TokenList}
-            displayBalances={true}
-            displayChain={false}
-            linkToApp={false}
-            shouldWithdrawOnDistribute={true}
-            useCache={true}
-            width={'xl'}
-          />
+
+        {/* --- Display Logic (no change needed here, uses percentAllocation) --- */}
+        {loading && (
+          <div className="flex items-center justify-center rounded-md border border-neutral-700 bg-neutral-800 p-4 text-gray-400">
+            <span className="ml-2">Loading recipients...</span>
+          </div>
         )}
+        {fetchError && (
+          <div className="rounded-md border border-red-700 bg-red-900/30 p-4 text-center text-red-400">
+            Error: {fetchError}
+          </div>
+        )}
+        {!loading &&
+          !fetchError &&
+          isAddress(splitAddress) &&
+          recipients.length > 0 && (
+            <div className="rounded-md border border-neutral-700 bg-neutral-800">
+              <div className="flex items-center justify-between border-b border-neutral-700 p-4">
+                <span className="font-medium text-gray-300">Recipients</span>
+                <span className="font-medium text-gray-300">Share</span>
+              </div>
+              <div className="space-y-2 p-4">
+                {/* Map over recipients, uses percentAllocation calculated above */}
+                {recipients.map(
+                  (
+                    recipient: { address: string; percentAllocation: number },
+                    index: number,
+                  ) => (
+                    <div
+                      key={index}
+                      className="flex items-center justify-between"
+                    >
+                      <span className="font-mono text-sm text-gray-400">
+                        {recipient.address.slice(0, 6)}...
+                        {recipient.address.slice(-4)}
+                      </span>
+                      <span className="text-sm text-gray-300">
+                        {/* Display the calculated percentage */}
+                        {recipient.percentAllocation.toFixed(2)}%
+                      </span>
+                    </div>
+                  ),
+                )}
+              </div>
+            </div>
+          )}
+        {/* Optional: Add message if split exists but has no recipients */}
+        {!loading &&
+          !fetchError &&
+          isAddress(splitAddress) &&
+          recipients.length === 0 &&
+          splitExists && (
+            <div className="rounded-md border border-neutral-700 bg-neutral-800 p-4 text-center text-gray-400">
+              Split found, but it has no recipients.
+            </div>
+          )}
       </div>
     </form>
   )
