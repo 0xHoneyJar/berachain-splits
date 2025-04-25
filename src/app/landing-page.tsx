@@ -69,18 +69,18 @@ export default function Home() {
   )
 }
 
-const ExternalLink = ({ url, text }: { url: string; text: string }) => {
-  return (
-    <a
-      href={url}
-      target="_blank"
-      rel="noreferrer"
-      className="rounded border border-yellow-700 bg-yellow-900 px-3 py-1 text-center hover:bg-yellow-800 md:text-left"
-    >
-      {text}
-    </a>
-  )
-}
+// const ExternalLink = ({ url, text }: { url: string; text: string }) => {
+//   return (
+//     <a
+//       href={url}
+//       target="_blank"
+//       rel="noreferrer"
+//       className="rounded border border-yellow-700 bg-yellow-900 px-3 py-1 text-center hover:bg-yellow-800 md:text-left"
+//     >
+//       {text}
+//     </a>
+//   )
+// }
 
 const LandingPage = () => {
   return (
@@ -93,18 +93,18 @@ const LandingPage = () => {
         your wallet to continue.
       </p>
       <div className="flex flex-col space-y-4 md:flex-row md:items-center md:space-x-4 md:space-y-0">
-        <ExternalLink
+        {/* <ExternalLink
           url="https://github.com/0xSplits/splits-lite/tree/main"
           text="View on Github"
-        />
+        /> */}
         {/* <ExternalLink
           url="https://github.com/0xSplits/splits-lite/blob/main/src/constants/chains.ts"
           text="Supported chains"
         /> */}
-        <ExternalLink
+        {/* <ExternalLink
           url="https://github.com/0xSplits/splits-lite/blob/main/src/constants/erc20.ts"
           text="Supported tokens"
-        />
+        /> */}
       </div>
       <div className="w-full pt-8">
         <h3 className="mb-8 text-xl">Deployed Contracts</h3>
